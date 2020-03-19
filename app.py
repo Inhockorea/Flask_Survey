@@ -18,7 +18,7 @@ def starting_survey():
 def start_survey():
     "Sets initial session values and redirects user to survey."
     session["answers"] = []
-    session["question_num"] = 0
+    session["question_num"] = 0 #could just be the answers index
     
     return redirect("/questions/0") 
 
@@ -30,6 +30,7 @@ def show_questions(num):
     
     if not int(num) == int(session["question_num"]):
         if int(session["question_num"]) >= len(satisfaction_survey.questions):
+            flash("YOU'VE ALREADY FINISHED")
             return redirect("/thankyou")
         else:
             rightnum = session["question_num"]
@@ -48,11 +49,12 @@ def show_questions(num):
 def handle_answer():
     "append answer to responses list and redirect to the next question"
 
+    #Seems to work in terminal, profs say no - why?
     session["answers"].append(request.form["choice"])
     
     session["question_num"] = int(session["question_num"]) + 1
     num = session["question_num"]
-    
+
     print("Your answers so far", session["answers"])
 
     #May want to impliment an active survey variable?
