@@ -7,7 +7,13 @@
 </head>
 
 <body>
-
+  {% for msg in get_flashed_messages() %}
+    <div style="border: 1px solid black;
+    border-radius: 4px; 
+    background-color: red;
+    padding: 5px; 
+    color: #fff;"><h3>{{msg}}</h3></div>
+  {% endfor %}
   {% block content %}
   {% endblock %}
   
